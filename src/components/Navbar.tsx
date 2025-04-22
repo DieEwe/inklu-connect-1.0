@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Puzzle } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +18,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-gradient">
-            NocturneNexus
+          <Link to="/" className="flex items-center space-x-2">
+            <img 
+              src="/logo.png" 
+              alt="Inklu-Connect Logo" 
+              className="h-8 w-8"
+            />
+            <span className="text-2xl font-bold text-gradient">Inklu-Connect</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -33,7 +38,10 @@ const Navbar = () => {
             
             <Link to="/login" className="nav-link">Login</Link>
             <Link to="/register">
-              <Button variant="outline" className="ml-2 border-highlight text-highlight hover:bg-highlight hover:text-white">
+              <Button 
+                variant="outline" 
+                className="ml-2 border-[#5cb43d] text-[#5cb43d] hover:bg-[#5cb43d]/10"
+              >
                 Registrieren
               </Button>
             </Link>

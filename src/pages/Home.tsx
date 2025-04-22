@@ -1,31 +1,46 @@
-
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
+import { Puzzle } from "lucide-react";
 
 const Home = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-1 pt-16"> {/* pt-16 to offset the fixed navbar */}
+      <main className="flex-1 pt-16">
         {/* Hero Section */}
         <Section id="hero" bgColor="bg-dark-300" className="min-h-[90vh] flex items-center">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-gradient">Karrierecoaching</span> für deine berufliche Zukunft
-              </h1>
+              <div className="flex items-center mb-4">
+                <img 
+                  src="/logo.png" 
+                  alt="Inklu-Connect Logo" 
+                  className="h-12 w-12 mr-4"
+                />
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                  <span className="text-gradient">Inklu-Connect</span>
+                </h1>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+                Karrierecoaching für deine berufliche Zukunft
+              </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-8">
                 Wir begleiten dich auf deinem Weg zum Traumjob mit persönlichem Coaching und exklusiven Karrieremöglichkeiten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-highlight hover:bg-highlight-hover text-white px-8 py-6">
+                <Button 
+                  className="bg-[#5cb43d] hover:bg-[#5cb43d]/90 text-white px-8 py-6"
+                >
                   Coaching entdecken
                 </Button>
-                <Button variant="outline" className="border-highlight text-highlight hover:bg-highlight/10 px-8 py-6">
+                <Button 
+                  variant="outline" 
+                  className="border-[#5cb43d] text-[#5cb43d] hover:bg-[#5cb43d]/10 px-8 py-6"
+                >
                   Talentpool beitreten
                 </Button>
               </div>
