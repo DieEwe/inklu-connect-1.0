@@ -1,57 +1,55 @@
+
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
-import { Puzzle } from "lucide-react";
 
 const Home = () => {
+  // Intersection observer to animate section entry
+  // For each section, apply "fade-in-up section-transition" based on scroll position (handled in Section component or parent)
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <main className="flex-1 pt-16">
+      <main className="flex-1 pt-20">
         {/* Hero Section */}
-        <Section id="hero" bgColor="bg-dark-300" className="min-h-[90vh] flex items-center">
+        <Section id="hero" bgColor="bg-dark-300" className="min-h-[90vh] flex items-center section-transition fade-in-up">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0">
               <div className="flex items-center mb-4">
-                <img 
-                  src="/logo.png" 
-                  alt="Inklu-Connect Logo" 
-                  className="h-12 w-12 mr-4"
+                <img
+                  src="/logo.png"
+                  alt="Inklu-Connect Logo"
+                  className="h-14 w-14 mr-5 rounded-xl ring-2 ring-[#73bde9]"
+                  style={{ objectFit: "contain", background: "#181a20" }}
                 />
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                  <span className="text-gradient">Inklu-Connect</span>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gradient">
+                  Inklu-Connect
                 </h1>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#73bde9]">
                 Karrierecoaching für deine berufliche Zukunft
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
                 Wir begleiten dich auf deinem Weg zum Traumjob mit persönlichem Coaching und exklusiven Karrieremöglichkeiten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  className="bg-[#5cb43d] hover:bg-[#5cb43d]/90 text-white px-8 py-6"
-                >
+                <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8 py-6 rounded-lg transition-shadow shadow-lg">
                   Coaching entdecken
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-[#5cb43d] text-[#5cb43d] hover:bg-[#5cb43d]/10 px-8 py-6"
-                >
+                <Button variant="outline" className="border-[#73bde9] text-[#73bde9] hover:bg-[#73bde9]/10 px-8 py-6 font-semibold text-lg rounded-lg">
                   Talentpool beitreten
                 </Button>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-full max-w-md">
-                <div className="absolute -inset-1 bg-gradient-to-r from-highlight to-highlight-secondary rounded-xl blur-xl opacity-40"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-40"></div>
                 <div className="relative bg-dark-200 rounded-xl p-8 border border-border/50">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Karrierecoaching" 
+                  <img
+                    src="/placeholder.svg"
+                    alt="Karrierecoaching"
                     className="w-full h-auto rounded-lg"
                   />
                 </div>
@@ -60,17 +58,16 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* Coaching Section */}
-        <Section id="coaching" bgColor="bg-dark-200" className="py-24">
+        {/* Coaching */}
+        <Section id="coaching" bgColor="bg-dark-200" className="py-24 section-transition fade-in-up">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Unser <span className="text-gradient">Coaching</span> Angebot
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Maßgeschneiderte Beratung für jeden Karriereschritt
             </p>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -87,18 +84,18 @@ const Home = () => {
               }
             ].map((item, index) => (
               <div key={index} className="glass-card p-6 rounded-xl hover-scale">
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-[#73bde9]">{item.title}</h3>
                 <p className="text-muted-foreground">{item.description}</p>
               </div>
             ))}
           </div>
         </Section>
 
-        {/* Job Placement Section */}
-        <Section id="jobs" bgColor="bg-dark-300" className="py-24">
+        {/* Job Placement */}
+        <Section id="jobs" bgColor="bg-dark-300" className="py-24 section-transition fade-in-up">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 <span className="text-gradient">Jobs vermitteln</span> leicht gemacht
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
@@ -112,18 +109,18 @@ const Home = () => {
                   "Langfristige Karrierebegleitung"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-highlight mr-2">✓</span>
+                    <span className="text-[#73bde9] mr-2">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <Button className="bg-highlight hover:bg-highlight-hover text-white">
+              <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8">
                 Alle Jobs anzeigen
               </Button>
             </div>
             <div className="md:w-1/2">
               <div className="relative w-full">
-                <div className="absolute -inset-1 bg-gradient-to-r from-highlight to-highlight-secondary rounded-xl blur-xl opacity-30"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-30"></div>
                 <div className="relative bg-dark-200 rounded-xl p-8 border border-border/50">
                   <img 
                     src="/placeholder.svg" 
@@ -136,11 +133,11 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* Talentpool Section */}
-        <Section id="talent-pool" bgColor="bg-dark-400" className="py-24">
+        {/* Talentpool */}
+        <Section id="talent-pool" bgColor="bg-dark-400" className="py-24 section-transition fade-in-up">
           <div className="flex flex-col md:flex-row-reverse items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 md:pl-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 Werde Teil unseres <span className="text-gradient">Talentpools</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
@@ -162,18 +159,18 @@ const Home = () => {
                   }
                 ].map((item, index) => (
                   <div key={index} className="bg-dark-300/50 p-4 rounded-lg">
-                    <h3 className="font-medium text-highlight">{item.title}</h3>
+                    <h3 className="font-medium text-[#73bde9]">{item.title}</h3>
                     <p className="text-sm text-muted-foreground">{item.description}</p>
                   </div>
                 ))}
               </div>
-              <Button className="bg-highlight hover:bg-highlight-hover text-white">
+              <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8">
                 Zum Talentpool
               </Button>
             </div>
             <div className="md:w-1/2">
               <div className="relative w-full">
-                <div className="absolute -inset-1 bg-gradient-to-r from-highlight to-highlight-secondary rounded-xl blur-xl opacity-30"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-30"></div>
                 <div className="relative bg-dark-300 rounded-xl p-8 border border-border/50">
                   <img 
                     src="/placeholder.svg" 
@@ -187,22 +184,22 @@ const Home = () => {
         </Section>
 
         {/* CTA Section */}
-        <Section id="cta" bgColor="bg-dark-300" className="py-20">
+        <Section id="cta" bgColor="bg-dark-300" className="py-20 section-transition fade-in-up">
           <div className="relative overflow-hidden rounded-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-highlight/20 to-highlight-secondary/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#73bde9]/20 to-[#8ae1f4]/30"></div>
             <div className="relative p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 Bereit für den nächsten Karriereschritt?
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Registriere dich jetzt und starte deine Reise zu neuen beruflichen Möglichkeiten. Unser Team steht bereit, um dich zu unterstützen.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button className="bg-highlight hover:bg-highlight-hover text-white px-8 py-6 text-lg">
+                <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white px-8 py-6 text-lg font-semibold">
                   Jetzt registrieren
                 </Button>
                 <Link to="/login">
-                  <Button variant="outline" className="border-highlight text-highlight hover:bg-highlight/10 px-8 py-6 text-lg">
+                  <Button variant="outline" className="border-[#73bde9] text-[#73bde9] hover:bg-[#73bde9]/10 px-8 py-6 text-lg font-semibold">
                     Zum Login
                   </Button>
                 </Link>
@@ -211,7 +208,6 @@ const Home = () => {
           </div>
         </Section>
       </main>
-      
       <Footer />
     </div>
   );

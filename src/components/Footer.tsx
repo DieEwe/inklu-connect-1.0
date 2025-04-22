@@ -10,7 +10,7 @@ const Footer = () => {
             <img 
               src="/logo.png" 
               alt="Inklu-Connect Logo" 
-              className="h-8 w-8"
+              className="h-8 w-8 rounded-lg ring-2 ring-[#73bde9]"
             />
             <Link to="/" className="text-xl font-bold text-gradient">
               Inklu-Connect
@@ -19,12 +19,11 @@ const Footer = () => {
               © {new Date().getFullYear()} Inklu-Connect. Alle Rechte vorbehalten.
             </p>
           </div>
-          
           <div className="flex space-x-6">
-            <Link to="/impressum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/impressum" className="text-sm text-muted-foreground hover:text-[#73bde9] transition-colors">
               Impressum
             </Link>
-            <Link to="/datenschutz" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/datenschutz" className="text-sm text-muted-foreground hover:text-[#73bde9] transition-colors">
               Datenschutz
             </Link>
           </div>

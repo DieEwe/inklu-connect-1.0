@@ -42,6 +42,10 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --highlight: 198 64% 68%; /* #73bde9 */
+    --highlight-secondary: 194 69% 79%; /* lighter blue */
+    --highlight-hover: 202 73% 55%;
   }
 
   /* Dark mode is the default for our app */
@@ -97,7 +101,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-highlight to-highlight-secondary bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] bg-clip-text text-transparent;
   }
   
   .glass-card {
@@ -105,7 +109,20 @@
   }
   
   .section-transition {
-    @apply transition-all duration-300;
+    @apply transition-all duration-500 ease-in-out;
+    will-change: opacity, transform;
+  }
+  
+  .fade-in-up {
+    @apply opacity-0 transform translate-y-8;
+    animation: fade-in-up 0.85s cubic-bezier(0.24,0.92,0.51,1.75) forwards;
+  }
+  
+  @keyframes fade-in-up {
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
   
   .hover-scale {
@@ -113,6 +130,6 @@
   }
   
   .nav-link {
-    @apply px-4 py-2 relative text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-highlight after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300;
+    @apply px-4 py-2 relative text-foreground/80 hover:text-[#73bde9] transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#73bde9] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300;
   }
 }
