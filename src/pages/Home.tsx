@@ -6,8 +6,11 @@ import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Calendar, Briefcase, CheckCircle, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Home = () => {
+  const { language } = useLanguage();
+  
   // Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,6 +37,32 @@ const Home = () => {
     };
   }, []);
 
+  // Translations
+  const translations = {
+    heroTitle: language === "DE" ? 
+      "Karriere<span class='text-primary'>coaching</span> für deine <span class='text-gradient'>berufliche Zukunft</span>" : 
+      "Career<span class='text-primary'>coaching</span> for your <span class='text-gradient'>professional future</span>",
+    heroText: language === "DE" ? 
+      "Wir begleiten dich auf deinem Weg zum Traumjob mit persönlichem Coaching und exklusiven Karrieremöglichkeiten." : 
+      "We accompany you on your path to your dream job with personal coaching and exclusive career opportunities.",
+    coachingBtn: language === "DE" ? "Coaching entdecken" : "Discover coaching",
+    talentpoolBtn: language === "DE" ? "Talentpool beitreten" : "Join talent pool",
+    trustedBy: language === "DE" ? "Vertrauen von führenden Unternehmen" : "Trusted by leading companies",
+    
+    // Coaching section
+    coachingTitle: language === "DE" ? "Unser <span class='text-gradient'>Coaching</span> Angebot" : "Our <span class='text-gradient'>Coaching</span> Services",
+    coachingSubtitle: language === "DE" ? "Professionelle Begleitung auf deinem Karriereweg" : "Professional guidance on your career path",
+    
+    // Coaching types
+    coachingType1Title: language === "DE" ? "Karriereberatung" : "Career Consulting",
+    coachingType1Desc: language === "DE" ? "Individuelle Beratung für deine berufliche Weiterentwicklung mit persönlichen Zukunftsperspektiven." : "Individual consulting for your professional development with personal future perspectives.",
+    coachingType2Title: language === "DE" ? "Bewerbungscoaching" : "Application Coaching",
+    coachingType2Desc: language === "DE" ? "Optimiere deine Bewerbungsunterlagen und bereite dich optimal auf Vorstellungsgespräche vor." : "Optimize your application documents and prepare optimally for job interviews.",
+    coachingType3Title: language === "DE" ? "Führungskräfteentwicklung" : "Leadership Development",
+    coachingType3Desc: language === "DE" ? "Entwickle deine Führungsqualitäten und baue deine Stärken für das nächste Karrierelevel aus." : "Develop your leadership qualities and build your strengths for the next career level.",
+    moreInfo: language === "DE" ? "Mehr erfahren" : "Learn more",
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -45,25 +74,22 @@ const Home = () => {
           
           <div className="hero-element relative z-10 flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-12 md:mb-0 animate-on-scroll opacity-0">
-              <h1 className="headline-xl mb-6">
-                Karriere<span className="text-primary">coaching</span> für deine 
-                <span className="text-gradient"> berufliche Zukunft</span>
-              </h1>
+              <h1 className="headline-xl mb-6" dangerouslySetInnerHTML={{ __html: translations.heroTitle }}></h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-                Wir begleiten dich auf deinem Weg zum Traumjob mit persönlichem Coaching und exklusiven Karrieremöglichkeiten.
+                {translations.heroText}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="button-primary text-lg px-6 py-6 rounded-lg group">
-                  Coaching entdecken 
+                  {translations.coachingBtn}
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-6 py-6 text-lg rounded-lg">
-                  Talentpool beitreten
+                  {translations.talentpoolBtn}
                 </Button>
               </div>
               
               <div className="mt-10">
-                <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Vertrauen von führenden Unternehmen</p>
+                <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">{translations.trustedBy}</p>
                 <div className="flex flex-wrap gap-8 items-center">
                   <img src="/placeholder.svg" alt="Partner 1" className="h-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
                   <img src="/placeholder.svg" alt="Partner 2" className="h-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
@@ -87,14 +113,12 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* Services Section */}
+        {/* Coaching Section - Replaced the Services Section */}
         <Section bgColor="bg-background" className="py-24 relative">
           <div className="text-center mb-16 animate-on-scroll opacity-0">
-            <h2 className="headline-lg mb-4">
-              Unsere <span className="text-gradient">Services</span>
-            </h2>
+            <h2 className="headline-lg mb-4" dangerouslySetInnerHTML={{ __html: translations.coachingTitle }}></h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Maßgeschneiderte Beratung für jeden Karriereschritt
+              {translations.coachingSubtitle}
             </p>
           </div>
           
@@ -102,18 +126,18 @@ const Home = () => {
             {[
               {
                 icon: <Users className="h-8 w-8 text-primary" />,
-                title: "Karriereberatung",
-                description: "Individuelle Beratung für deine berufliche Weiterentwicklung mit persönlichen Zukunftsperspektiven."
+                title: translations.coachingType1Title,
+                description: translations.coachingType1Desc
               },
               {
                 icon: <Calendar className="h-8 w-8 text-primary" />,
-                title: "Bewerbungscoaching",
-                description: "Optimiere deine Bewerbungsunterlagen und bereite dich optimal auf Vorstellungsgespräche vor."
+                title: translations.coachingType2Title,
+                description: translations.coachingType2Desc
               },
               {
                 icon: <Briefcase className="h-8 w-8 text-primary" />,
-                title: "Führungskräfteentwicklung",
-                description: "Entwickle deine Führungsqualitäten und baue deine Stärken für das nächste Karrierelevel aus."
+                title: translations.coachingType3Title,
+                description: translations.coachingType3Desc
               }
             ].map((item, index) => (
               <div 
@@ -127,7 +151,7 @@ const Home = () => {
                 <h3 className="headline-sm mb-3 text-foreground">{item.title}</h3>
                 <p className="text-muted-foreground mb-4">{item.description}</p>
                 <a href="#" className="inline-flex items-center text-primary hover:underline group">
-                  Mehr erfahren <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  {translations.moreInfo} <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             ))}

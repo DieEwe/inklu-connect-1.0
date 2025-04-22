@@ -38,6 +38,8 @@
     --highlight: 198 64% 68%; /* #73bde9 */
     --highlight-secondary: 194 69% 79%; /* lighter blue */
     --highlight-hover: 198 52% 50%;
+    
+    --golden: 50 100% 60%; /* Golden color for glowing effects */
   }
 
   /* Dark mode is now the default for our app */
@@ -60,11 +62,19 @@
     background-blend-mode: soft-light;
     background-attachment: fixed;
   }
+  
+  html {
+    @apply scroll-smooth;
+  }
 }
 
 @layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] bg-clip-text text-transparent;
+  }
+  
+  .golden-text {
+    @apply bg-gradient-to-r from-[#ffd700] to-[#ffb300] bg-clip-text text-transparent;
   }
   
   .glass-card {
@@ -77,11 +87,15 @@
   }
   
   .fade-in-up {
-    @apply opacity-0 transform translate-y-8;
+    @apply opacity-100 transform translate-y-0;
     animation: fade-in-up 0.85s cubic-bezier(0.24,0.92,0.51,1) forwards;
   }
   
   @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
     to {
       opacity: 1;
       transform: none;
@@ -100,7 +114,7 @@
   }
   
   .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-transform duration-300 hover:scale-105;
   }
   
   .nav-link {
@@ -115,6 +129,11 @@
   .circle-glow {
     @apply absolute rounded-full blur-3xl opacity-20;
     background: radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%);
+  }
+  
+  .golden-glow {
+    @apply absolute rounded-full blur-3xl opacity-20;
+    background: radial-gradient(circle, hsl(var(--golden)) 0%, transparent 70%);
   }
 
   .service-card {
@@ -154,4 +173,20 @@
   .headline-sm {
     @apply text-xl md:text-2xl font-semibold;
   }
+  
+  /* Golden glow effect for app selector tiles */
+  .golden-card-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .golden-card-glow::after {
+    content: '';
+    @apply absolute -inset-1 bg-gradient-to-r from-[#ffd700]/20 to-transparent opacity-0 rounded-lg transition-opacity duration-300;
+    z-index: -1;
+  }
+  
+  .golden-card-glow:hover::after {
+    @apply opacity-100;
+  }
 }
+

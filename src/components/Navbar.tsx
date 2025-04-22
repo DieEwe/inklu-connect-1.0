@@ -24,6 +24,16 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
+  // Create translated content based on the current language
+  const translations = {
+    home: language === "DE" ? "Home" : "Home",
+    coaching: language === "DE" ? "Coaching" : "Coaching",
+    jobs: language === "DE" ? "Jobs" : "Jobs",
+    talentpool: language === "DE" ? "Talentpool" : "Talent Pool",
+    login: language === "DE" ? "Login" : "Login",
+    register: language === "DE" ? "Registrieren" : "Register"
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -44,10 +54,10 @@ const Navbar = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="nav-link font-medium text-lg">Home</Link>
-            <Link to="/coaching" className="nav-link font-medium text-lg">Coaching</Link>
-            <Link to="/jobs" className="nav-link font-medium text-lg">Jobs</Link>
-            <Link to="/talent-pool" className="nav-link font-medium text-lg">Talentpool</Link>
+            <Link to="/" className="nav-link font-medium text-lg">{translations.home}</Link>
+            <Link to="/coaching" className="nav-link font-medium text-lg">{translations.coaching}</Link>
+            <Link to="/jobs" className="nav-link font-medium text-lg">{translations.jobs}</Link>
+            <Link to="/talent-pool" className="nav-link font-medium text-lg">{translations.talentpool}</Link>
             
             <div className="ml-4 flex items-center gap-3">
               <Button 
@@ -63,14 +73,14 @@ const Navbar = () => {
               <div className="h-5 w-px bg-border mx-1"></div>
               
               <Link to="/login" className="font-medium text-foreground/80 hover:text-primary transition-colors">
-                Login
+                {translations.login}
               </Link>
               
               <Link to="/register">
                 <Button 
                   className="ml-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-medium"
                 >
-                  Registrieren
+                  {translations.register}
                 </Button>
               </Link>
             </div>
@@ -87,15 +97,15 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border/20 animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-            <Link to="/" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Home</Link>
-            <Link to="/coaching" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Coaching</Link>
-            <Link to="/jobs" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Jobs</Link>
-            <Link to="/talent-pool" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Talentpool</Link>
+            <Link to="/" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.home}</Link>
+            <Link to="/coaching" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.coaching}</Link>
+            <Link to="/jobs" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.jobs}</Link>
+            <Link to="/talent-pool" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.talentpool}</Link>
             <div className="h-px w-full bg-border/20 my-2"></div>
-            <Link to="/login" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Login</Link>
+            <Link to="/login" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.login}</Link>
             <Link to="/register" onClick={toggleMenu}>
               <Button className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-medium">
-                Registrieren
+                {translations.register}
               </Button>
             </Link>
             <Button 
