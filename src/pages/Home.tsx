@@ -1,56 +1,85 @@
 
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Users, Calendar, Briefcase, CheckCircle, ChevronRight } from "lucide-react";
 
 const Home = () => {
-  // Intersection observer to animate section entry
-  // For each section, apply "fade-in-up section-transition" based on scroll position (handled in Section component or parent)
+  // Observer for animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const sections = document.querySelectorAll(".animate-on-scroll");
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        observer.unobserve(section);
+      });
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 pt-20">
+      <main className="flex-1">
         {/* Hero Section */}
-        <Section id="hero" bgColor="bg-dark-300" className="min-h-[90vh] flex items-center section-transition fade-in-up">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <div className="flex items-center mb-4">
-                <img
-                  src="/logo.png"
-                  alt="Inklu-Connect Logo"
-                  className="h-14 w-14 mr-5 rounded-xl ring-2 ring-[#73bde9]"
-                  style={{ objectFit: "contain", background: "#181a20" }}
-                />
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gradient">
-                  Inklu-Connect
-                </h1>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#73bde9]">
-                Karrierecoaching für deine berufliche Zukunft
-              </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+        <Section bgColor="bg-transparent" className="min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden">
+          <div className="circle-glow w-[800px] h-[800px] top-[-300px] right-[-300px]"></div>
+          <div className="circle-glow w-[600px] h-[600px] bottom-[-200px] left-[-200px]"></div>
+          
+          <div className="hero-element relative z-10 flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 mb-12 md:mb-0 animate-on-scroll opacity-0">
+              <h1 className="headline-xl mb-6">
+                Karriere<span className="text-primary">coaching</span> für deine 
+                <span className="text-gradient"> berufliche Zukunft</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 Wir begleiten dich auf deinem Weg zum Traumjob mit persönlichem Coaching und exklusiven Karrieremöglichkeiten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8 py-6 rounded-lg transition-shadow shadow-lg">
-                  Coaching entdecken
+                <Button className="button-primary text-lg px-6 py-6 rounded-lg group">
+                  Coaching entdecken 
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" className="border-[#73bde9] text-[#73bde9] hover:bg-[#73bde9]/10 px-8 py-6 font-semibold text-lg rounded-lg">
+                <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-6 py-6 text-lg rounded-lg">
                   Talentpool beitreten
                 </Button>
               </div>
+              
+              <div className="mt-10">
+                <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Vertrauen von führenden Unternehmen</p>
+                <div className="flex flex-wrap gap-8 items-center">
+                  <img src="/placeholder.svg" alt="Partner 1" className="h-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <img src="/placeholder.svg" alt="Partner 2" className="h-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <img src="/placeholder.svg" alt="Partner 3" className="h-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
+                </div>
+              </div>
             </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="relative w-full max-w-md">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-40"></div>
-                <div className="relative bg-dark-200 rounded-xl p-8 border border-border/50">
+            
+            <div className="md:w-1/2 flex justify-center animate-on-scroll opacity-0" style={{animationDelay: "0.2s"}}>
+              <div className="relative w-full max-w-lg">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-3xl opacity-20"></div>
+                <div className="relative rounded-2xl overflow-hidden border border-border/30 bg-secondary/30 backdrop-blur-sm">
                   <img
                     src="/placeholder.svg"
                     alt="Karrierecoaching"
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
@@ -58,50 +87,66 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* Coaching */}
-        <Section id="coaching" bgColor="bg-dark-200" className="py-24 section-transition fade-in-up">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Unser <span className="text-gradient">Coaching</span> Angebot
+        {/* Services Section */}
+        <Section bgColor="bg-background" className="py-24 relative">
+          <div className="text-center mb-16 animate-on-scroll opacity-0">
+            <h2 className="headline-lg mb-4">
+              Unsere <span className="text-gradient">Services</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Maßgeschneiderte Beratung für jeden Karriereschritt
             </p>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                icon: <Users className="h-8 w-8 text-primary" />,
                 title: "Karriereberatung",
-                description: "Individuelle Beratung für deine berufliche Weiterentwicklung"
+                description: "Individuelle Beratung für deine berufliche Weiterentwicklung mit persönlichen Zukunftsperspektiven."
               },
               {
+                icon: <Calendar className="h-8 w-8 text-primary" />,
                 title: "Bewerbungscoaching",
-                description: "Optimiere deine Bewerbungsunterlagen und bereite dich optimal auf Vorstellungsgespräche vor"
+                description: "Optimiere deine Bewerbungsunterlagen und bereite dich optimal auf Vorstellungsgespräche vor."
               },
               {
+                icon: <Briefcase className="h-8 w-8 text-primary" />,
                 title: "Führungskräfteentwicklung",
-                description: "Entwickle deine Führungsqualitäten und baue deine Stärken aus"
+                description: "Entwickle deine Führungsqualitäten und baue deine Stärken für das nächste Karrierelevel aus."
               }
             ].map((item, index) => (
-              <div key={index} className="glass-card p-6 rounded-xl hover-scale">
-                <h3 className="text-xl font-semibold mb-3 text-[#73bde9]">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+              <div 
+                key={index} 
+                className="service-card animate-on-scroll opacity-0"
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <div className="mb-4 p-3 rounded-lg w-fit bg-primary/10 border border-primary/20">
+                  {item.icon}
+                </div>
+                <h3 className="headline-sm mb-3 text-foreground">{item.title}</h3>
+                <p className="text-muted-foreground mb-4">{item.description}</p>
+                <a href="#" className="inline-flex items-center text-primary hover:underline group">
+                  Mehr erfahren <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
               </div>
             ))}
           </div>
         </Section>
 
         {/* Job Placement */}
-        <Section id="jobs" bgColor="bg-dark-300" className="py-24 section-transition fade-in-up">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <Section bgColor="bg-secondary/20" className="py-24 relative">
+          <div className="circle-glow w-[600px] h-[600px] bottom-[-200px] right-[-300px]"></div>
+          
+          <div className="flex flex-col md:flex-row items-center relative z-10">
+            <div className="md:w-1/2 mb-12 md:mb-0 md:pr-12 animate-on-scroll opacity-0">
+              <h2 className="headline-lg mb-6">
                 <span className="text-gradient">Jobs vermitteln</span> leicht gemacht
               </h2>
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="text-lg text-muted-foreground mb-8">
                 Wir verbinden Unternehmen mit den besten Talenten. Unsere Experten kennen den Markt und finden die passende Position für dich.
               </p>
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-4 mb-8">
                 {[
                   "Exklusive Stellenangebote",
                   "Persönliche Vermittlung",
@@ -109,23 +154,24 @@ const Home = () => {
                   "Langfristige Karrierebegleitung"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-[#73bde9] mr-2">✓</span>
+                    <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8">
-                Alle Jobs anzeigen
+              <Button className="button-primary group">
+                Alle Jobs anzeigen <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
-            <div className="md:w-1/2">
-              <div className="relative w-full">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-30"></div>
-                <div className="relative bg-dark-200 rounded-xl p-8 border border-border/50">
+            
+            <div className="md:w-1/2 animate-on-scroll opacity-0" style={{animationDelay: "0.2s"}}>
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-3xl opacity-20"></div>
+                <div className="relative rounded-2xl overflow-hidden border border-border/30 bg-secondary/30 backdrop-blur-sm">
                   <img 
                     src="/placeholder.svg" 
                     alt="Jobs vermitteln" 
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
@@ -134,16 +180,16 @@ const Home = () => {
         </Section>
 
         {/* Talentpool */}
-        <Section id="talent-pool" bgColor="bg-dark-400" className="py-24 section-transition fade-in-up">
+        <Section bgColor="bg-background" className="py-24 relative">
           <div className="flex flex-col md:flex-row-reverse items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 md:pl-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <div className="md:w-1/2 mb-12 md:mb-0 md:pl-12 animate-on-scroll opacity-0">
+              <h2 className="headline-lg mb-6">
                 Werde Teil unseres <span className="text-gradient">Talentpools</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="text-lg text-muted-foreground mb-8">
                 Melde dich für unseren exklusiven Talentpool an und erhalte Zugang zu erstklassigen Karrieremöglichkeiten, die nicht öffentlich ausgeschrieben werden.
               </p>
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-8">
                 {[
                   {
                     title: "Exklusive Jobs",
@@ -158,24 +204,25 @@ const Home = () => {
                     description: "Regelmäßige Updates zu passenden Stellenangeboten"
                   }
                 ].map((item, index) => (
-                  <div key={index} className="bg-dark-300/50 p-4 rounded-lg">
-                    <h3 className="font-medium text-[#73bde9]">{item.title}</h3>
+                  <div key={index} className="glass-card p-4 rounded-lg">
+                    <h3 className="font-medium text-primary">{item.title}</h3>
                     <p className="text-sm text-muted-foreground">{item.description}</p>
                   </div>
                 ))}
               </div>
-              <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white font-semibold text-lg px-8">
-                Zum Talentpool
+              <Button className="button-primary group">
+                Zum Talentpool <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
-            <div className="md:w-1/2">
-              <div className="relative w-full">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] rounded-xl blur-xl opacity-30"></div>
-                <div className="relative bg-dark-300 rounded-xl p-8 border border-border/50">
+            
+            <div className="md:w-1/2 animate-on-scroll opacity-0" style={{animationDelay: "0.2s"}}>
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-3xl opacity-20"></div>
+                <div className="relative rounded-2xl overflow-hidden border border-border/30 bg-secondary/30 backdrop-blur-sm">
                   <img 
                     src="/placeholder.svg" 
                     alt="Talentpool" 
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
@@ -184,22 +231,23 @@ const Home = () => {
         </Section>
 
         {/* CTA Section */}
-        <Section id="cta" bgColor="bg-dark-300" className="py-20 section-transition fade-in-up">
-          <div className="relative overflow-hidden rounded-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#73bde9]/20 to-[#8ae1f4]/30"></div>
-            <div className="relative p-8 md:p-12 text-center">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <Section bgColor="bg-secondary/20" className="py-20 relative">
+          <div className="circle-glow w-[800px] h-[800px] top-[10%] left-[50%] translate-x-[-50%]"></div>
+          
+          <div className="relative z-10 rounded-2xl overflow-hidden animate-on-scroll opacity-0">
+            <div className="relative p-10 md:p-16 text-center">
+              <h2 className="headline-lg mb-6">
                 Bereit für den nächsten Karriereschritt?
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
                 Registriere dich jetzt und starte deine Reise zu neuen beruflichen Möglichkeiten. Unser Team steht bereit, um dich zu unterstützen.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button className="bg-[#73bde9] hover:bg-[#54aad6] text-white px-8 py-6 text-lg font-semibold">
-                  Jetzt registrieren
+                <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
+                  Jetzt registrieren <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Link to="/login">
-                  <Button variant="outline" className="border-[#73bde9] text-[#73bde9] hover:bg-[#73bde9]/10 px-8 py-6 text-lg font-semibold">
+                  <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-8 py-6 text-lg rounded-lg">
                     Zum Login
                   </Button>
                 </Link>

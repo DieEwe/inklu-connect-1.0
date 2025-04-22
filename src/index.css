@@ -1,91 +1,49 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    --highlight: 198 64% 68%; /* #73bde9 */
-    --highlight-secondary: 194 69% 79%; /* lighter blue */
-    --highlight-hover: 202 73% 55%;
-  }
-
-  /* Dark mode is the default for our app */
-  :root {
-    --background: 225 20% 12%;
+    --background: 220 20% 9%;
     --foreground: 210 40% 98%;
 
-    --card: 228 20% 10%;
+    --card: 222 20% 7%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 228 20% 10%;
+    --popover: 222 20% 7%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 265 70% 75%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 198 64% 68%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 228 15% 20%;
+    --secondary: 222 15% 13%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 228 15% 20%;
+    --muted: 222 15% 13%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 265 70% 75%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 198 64% 68%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 228 15% 25%;
-    --input: 228 15% 25%;
-    --ring: 265 70% 75%;
+    --border: 222 15% 14%;
+    --input: 222 15% 14%;
+    --ring: 198 64% 68%;
 
-    --sidebar-background: 228 20% 12%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 265 70% 75%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 228 15% 20%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 228 15% 25%;
-    --sidebar-ring: 265 70% 75%;
+    --radius: 0.5rem;
+
+    --highlight: 198 64% 68%; /* #73bde9 */
+    --highlight-secondary: 194 69% 79%; /* lighter blue */
+    --highlight-hover: 198 52% 50%;
+  }
+
+  /* Dark mode is now the default for our app */
+  :root {
+    --background: 222 20% 5%;
+    --foreground: 210 40% 98%;
   }
 }
 
@@ -95,7 +53,12 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    background-image: url('/hexagon-pattern.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    background-blend-mode: soft-light;
+    background-attachment: fixed;
   }
 }
 
@@ -105,7 +68,7 @@
   }
   
   .glass-card {
-    @apply bg-secondary/50 backdrop-blur-sm border border-border/50;
+    @apply bg-secondary/30 backdrop-blur-sm border border-border/30;
   }
   
   .section-transition {
@@ -115,7 +78,7 @@
   
   .fade-in-up {
     @apply opacity-0 transform translate-y-8;
-    animation: fade-in-up 0.85s cubic-bezier(0.24,0.92,0.51,1.75) forwards;
+    animation: fade-in-up 0.85s cubic-bezier(0.24,0.92,0.51,1) forwards;
   }
   
   @keyframes fade-in-up {
@@ -125,11 +88,70 @@
     }
   }
   
+  .fade-in {
+    @apply opacity-0;
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+  
   .hover-scale {
     @apply transition-transform duration-200 hover:scale-105;
   }
   
   .nav-link {
-    @apply px-4 py-2 relative text-foreground/80 hover:text-[#73bde9] transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#73bde9] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300;
+    @apply relative text-foreground/90 transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:origin-bottom-right hover:after:origin-bottom-left after:transition-transform after:duration-300;
+  }
+
+  .hero-element {
+    position: relative;
+    z-index: 1;
+  }
+
+  .circle-glow {
+    @apply absolute rounded-full blur-3xl opacity-20;
+    background: radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%);
+  }
+
+  .service-card {
+    @apply relative p-6 rounded-xl glass-card border-border/30 hover:border-primary/30 transition-all duration-300 overflow-hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300;
+    z-index: -1;
+  }
+
+  .service-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .button-primary {
+    @apply bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium;
+  }
+
+  .button-secondary {
+    @apply bg-secondary/70 border border-border/50 text-foreground hover:bg-secondary hover:border-border transition-all duration-300;
+  }
+
+  .headline-xl {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+  }
+
+  .headline-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+
+  .headline-md {
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  .headline-sm {
+    @apply text-xl md:text-2xl font-semibold;
   }
 }

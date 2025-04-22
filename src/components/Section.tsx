@@ -8,11 +8,11 @@ interface SectionProps {
   bgColor?: string;
 }
 
-const Section = ({ children, className = "", id, bgColor = "bg-dark-300" }: SectionProps) => {
+const Section = ({ children, className = "", id, bgColor = "bg-background" }: SectionProps) => {
   return (
     <section 
       id={id}
-      className={`py-16 ${bgColor} section-transition ${className}`}
+      className={`py-16 ${bgColor} ${className}`}
     >
       <div className="container mx-auto px-4">
         {children}

@@ -1,12 +1,11 @@
 
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Calendar, Briefcase, User } from "lucide-react";
 
 const colorMap = [
-  "bg-gradient-to-tr from-[#73bde9] via-[#8ae1f4] to-[#b7ffcf]",
-  "bg-gradient-to-tr from-[#ffb357] via-[#73bde9] to-[#fcc2ff]",
-  "bg-gradient-to-tr from-[#b7ffcf] via-[#73bde9] to-[#ffdec0]"
+  "bg-gradient-to-tr from-primary/90 via-primary/70 to-[#b7ffcf]/50",
+  "bg-gradient-to-tr from-[#ffb357]/90 via-primary/70 to-[#fcc2ff]/50",
+  "bg-gradient-to-tr from-[#b7ffcf]/90 via-primary/70 to-[#ffdec0]/50"
 ];
 
 interface AppOption {
@@ -54,20 +53,18 @@ const AppSelector = () => {
           key={app.id}
           className="hover-scale block"
         >
-          <Card className="h-full glass-card border-[#73bde9]/40 hover:border-[#73bde9]/75 transition-colors shadow-lg">
-            <CardHeader className="flex flex-col items-center justify-center pt-8 pb-3">
+          <div className="h-full service-card border-border/30 bg-secondary/30 backdrop-blur-sm hover:shadow-lg">
+            <div className="flex flex-col items-center justify-center pt-8 pb-4">
               {/* logo + icon gradient */}
-              <div className={`mb-4 rounded-full p-3 ${app.iconBg} shadow-lg flex items-center justify-center`}>
+              <div className={`mb-4 rounded-full p-4 ${app.iconBg} shadow-lg flex items-center justify-center`}>
                 {app.icon}
               </div>
-              <CardTitle className="mt-1 text-2xl font-bold text-[#73bde9]">{app.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-muted-foreground">
+              <h3 className="mt-1 text-2xl font-bold text-foreground">{app.title}</h3>
+              <p className="text-center text-muted-foreground mt-2">
                 {app.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
+              </p>
+            </div>
+          </div>
         </Link>
       ))}
     </div>
