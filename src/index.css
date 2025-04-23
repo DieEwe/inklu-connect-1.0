@@ -1,256 +1,133 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 @layer base {
   :root {
-    --background: 220 20% 9%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
-    --card: 222 20% 7%;
+    
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222 20% 7%;
+    
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 198 64% 68%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 222 15% 13%;
+    
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 222 15% 13%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 198 64% 68%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
+    
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 222 15% 14%;
-    --input: 222 15% 14%;
-    --ring: 198 64% 68%;
-
-    --radius: 0.5rem;
-
-    --highlight: 198 64% 68%; /* #73bde9 */
-    --highlight-secondary: 194 69% 79%; /* lighter blue */
-    --highlight-hover: 198 52% 50%;
     
-    --golden: 50 100% 60%; /* Golden color for glowing effects */
-  }
-
-  :root.light-mode {
-    --background: 20 25% 95%;
-    --foreground: 20 10% 5%;
-    --card: 20 25% 97%;
-    --card-foreground: 20 10% 5%;
-    --popover: 20 25% 97%;
-    --popover-foreground: 20 10% 5%;
-    --primary: 20 100% 65%;
-    --primary-foreground: 20 5% 10%;
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.8% 44.1%;
-    --accent: 20 100% 65%;
-    --accent-foreground: 24 9.8% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 100% 65%;
-    --highlight: 20 100% 65%;
-    --highlight-hover: 20 100% 60%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    
+    --radius: 0.5rem;
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
-    background-image: url('/hexagon-pattern.png');
-    background-repeat: repeat;
-    background-size: 300px;
-    background-blend-mode: soft-light;
-    background-attachment: fixed;
-  }
-  
-  html {
-    @apply scroll-smooth;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-[#73bde9] to-[#8ae1f4] bg-clip-text text-transparent;
-  }
-  
-  .golden-text {
-    @apply bg-gradient-to-r from-[#ffd700] to-[#ffb300] bg-clip-text text-transparent;
-  }
-  
-  .glass-card {
-    @apply bg-secondary/30 backdrop-blur-sm border border-border/30;
-  }
-  
-  .section-transition {
-    @apply transition-all duration-500 ease-in-out;
-    will-change: opacity, transform;
-  }
-  
-  .fade-in-up {
-    @apply opacity-100 transform translate-y-0;
-    animation: fade-in-up 0.85s cubic-bezier(0.24,0.92,0.51,1) forwards;
-  }
-  
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  
-  .fade-in {
-    @apply opacity-0;
-    animation: fade-in 0.5s ease-out forwards;
-  }
-  
-  @keyframes fade-in {
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-  
-  .nav-link {
-    @apply relative text-foreground/90 transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:origin-bottom-right hover:after:origin-bottom-left after:transition-transform after:duration-300;
-  }
-
-  .hero-element {
-    position: relative;
-    z-index: 1;
-  }
-
-  .circle-glow {
-    @apply absolute rounded-full blur-3xl opacity-20;
-    background: radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%);
-  }
-  
-  .golden-glow {
-    @apply absolute rounded-full blur-3xl opacity-20;
-    background: radial-gradient(circle, hsl(var(--golden)) 0%, transparent 70%);
-  }
-
-  .service-card {
-    @apply relative p-6 rounded-xl glass-card border-border/30 hover:border-primary/30 transition-all duration-300 overflow-hidden;
-  }
-
-  .service-card::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300;
-    z-index: -1;
-  }
-
-  .service-card:hover::before {
-    @apply opacity-100;
-  }
-
-  .button-primary {
-    @apply bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium;
-  }
-
-  .button-secondary {
-    @apply bg-secondary/70 border border-border/50 text-foreground hover:bg-secondary hover:border-border transition-all duration-300;
-  }
-
+@layer components {
   .headline-xl {
-    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
   }
-
+  
   .headline-lg {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+    @apply text-3xl md:text-4xl font-bold leading-tight;
   }
-
+  
   .headline-md {
-    @apply text-2xl md:text-3xl font-bold;
+    @apply text-2xl md:text-3xl font-bold leading-tight;
   }
-
+  
   .headline-sm {
-    @apply text-xl md:text-2xl font-semibold;
+    @apply text-xl md:text-2xl font-bold leading-tight;
   }
   
-  /* Golden glow effect for app selector tiles */
-  .golden-card-glow {
-    @apply relative overflow-hidden;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60;
   }
   
-  .golden-card-glow::after {
-    content: '';
-    @apply absolute -inset-1 bg-gradient-to-r from-[#ffd700]/20 to-transparent opacity-0 rounded-lg transition-opacity duration-300;
-    z-index: -1;
+  .button-primary {
+    @apply bg-primary text-white hover:bg-primary/90 transition-colors;
   }
   
-  .golden-card-glow:hover::after {
-    @apply opacity-100;
-  }
-
-  /* Scroll Animation Classes */
-  .scroll-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
-  }
-
-  .scroll-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Section Background Variations */
-  .section-primary {
-    @apply bg-background;
-  }
-
-  .section-secondary {
-    @apply bg-secondary/40;
-  }
-
-  .section-accent {
-    @apply bg-muted/30;
-  }
-
-  /* Button Glow Effect */
   .button-glow {
     @apply relative overflow-hidden;
   }
-
-  .button-glow::before {
-    content: '';
-    @apply absolute inset-0 bg-primary/20 blur-xl opacity-0 transition-opacity duration-300;
-  }
-
-  .button-glow:hover::before {
-    @apply opacity-100;
-  }
-
+  
   .button-glow::after {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent opacity-0 transition-opacity duration-300;
+    @apply content-[''] absolute inset-0 z-[-1] bg-primary opacity-0 transition-opacity duration-300;
   }
-
+  
   .button-glow:hover::after {
-    @apply opacity-100;
+    @apply opacity-20;
   }
+  
+  .glass-card {
+    @apply border border-border/30 bg-secondary/30 backdrop-blur-sm;
+  }
+  
+  .service-card {
+    @apply p-6 rounded-xl border border-border/30 bg-secondary/30 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5;
+  }
+  
+  .circle-glow {
+    @apply absolute rounded-full bg-primary/20 blur-[100px] pointer-events-none z-0;
+  }
+  
+  .section-primary {
+    @apply bg-background;
+  }
+  
+  .section-secondary {
+    @apply bg-neutral-900/50;
+  }
+  
+  .section-accent {
+    @apply bg-primary/10;
+  }
+}
+
+/* Animation classes */
+.scroll-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

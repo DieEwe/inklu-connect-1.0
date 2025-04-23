@@ -26,6 +26,13 @@ const Home = () => {
     const sections = document.querySelectorAll('.scroll-section');
     sections.forEach((section) => observer.observe(section));
 
+    // Add animation class to make elements visible when they enter viewport
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach((element) => {
+      element.classList.add('transition-all', 'duration-700', 'ease-in-out');
+      observer.observe(element);
+    });
+
     return () => observer.disconnect();
   }, []);
 
@@ -63,6 +70,36 @@ const Home = () => {
         </Section>
       </main>
       <Footer />
+
+      <style jsx global>{`
+        .scroll-section {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .scroll-section.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        
+        .animate-on-scroll.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        /* Add transition delay for cascading effect */
+        .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+        .animate-on-scroll:nth-child(2) { transition-delay: 100ms; }
+        .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
+        .animate-on-scroll:nth-child(4) { transition-delay: 300ms; }
+        .animate-on-scroll:nth-child(5) { transition-delay: 400ms; }
+      `}</style>
     </div>
   );
 };
