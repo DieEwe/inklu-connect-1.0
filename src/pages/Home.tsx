@@ -10,30 +10,23 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Home = () => {
   const { language } = useLanguage();
   
-  // Observer for animations
+  // Add scroll animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in-up");
-            observer.unobserve(entry.target);
+            entry.target.classList.add('visible');
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const sections = document.querySelectorAll(".animate-on-scroll");
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+    const sections = document.querySelectorAll('.scroll-section');
+    sections.forEach((section) => observer.observe(section));
 
-    return () => {
-      sections.forEach((section) => {
-        observer.unobserve(section);
-      });
-    };
+    return () => observer.disconnect();
   }, []);
 
   // Translations for all sections
@@ -82,7 +75,7 @@ const Home = () => {
       <Navbar />
       <main className="flex-1">
         {/* Hero Section */}
-        <Section bgColor="bg-transparent" className="min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden">
+        <Section bgColor="section-primary" className="min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden scroll-section">
           <div className="circle-glow w-[800px] h-[800px] top-[-300px] right-[-300px]"></div>
           <div className="circle-glow w-[600px] h-[600px] bottom-[-200px] left-[-200px]"></div>
           
@@ -93,13 +86,9 @@ const Home = () => {
                 {translations.heroText}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="relative group overflow-hidden">
-                  <div className="absolute inset-0 bg-[#f49357] opacity-90 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#f49357] to-[#f4935780] opacity-0 group-hover:opacity-100 blur-lg transition-opacity"></div>
-                  <span className="relative px-6 py-4 text-lg text-white flex items-center">
-                    {translations.coachingBtn}
-                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                <Button className="button-glow button-primary text-lg px-6 py-6 rounded-lg group">
+                  {translations.coachingBtn}
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-6 py-6 text-lg rounded-lg">
                   {translations.talentpoolBtn}
@@ -131,8 +120,8 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* Coaching Section - Replaced the Services Section */}
-        <Section bgColor="bg-background" className="py-24 relative">
+        {/* Coaching Section */}
+        <Section bgColor="section-secondary" className="py-24 relative scroll-section">
           <div className="text-center mb-16 animate-on-scroll opacity-0">
             <h2 className="headline-lg mb-4" dangerouslySetInnerHTML={{ __html: translations.coaching.title }}></h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -186,7 +175,7 @@ const Home = () => {
         </Section>
 
         {/* Job Placement */}
-        <Section bgColor="bg-secondary/20" className="py-24 relative">
+        <Section bgColor="section-accent" className="py-24 relative scroll-section">
           <div className="circle-glow w-[600px] h-[600px] bottom-[-200px] right-[-300px]"></div>
           
           <div className="flex flex-col md:flex-row items-center relative z-10">
@@ -238,7 +227,7 @@ const Home = () => {
         </Section>
 
         {/* Talentpool */}
-        <Section bgColor="bg-background" className="py-24 relative">
+        <Section bgColor="section-secondary" className="py-24 relative scroll-section">
           <div className="flex flex-col md:flex-row-reverse items-center">
             <div className="md:w-1/2 mb-12 md:mb-0 md:pl-12 animate-on-scroll opacity-0">
               <h2 className="headline-lg mb-6">
@@ -296,7 +285,7 @@ const Home = () => {
         </Section>
 
         {/* CTA Section */}
-        <Section bgColor="bg-secondary/20" className="py-20 relative">
+        <Section bgColor="section-primary" className="py-20 relative scroll-section">
           <div className="circle-glow w-[800px] h-[800px] top-[10%] left-[50%] translate-x-[-50%]"></div>
           
           <div className="relative z-10 rounded-2xl overflow-hidden animate-on-scroll opacity-0">

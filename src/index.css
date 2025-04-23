@@ -205,4 +205,52 @@
   .golden-card-glow:hover::after {
     @apply opacity-100;
   }
+
+  /* Scroll Animation Classes */
+  .scroll-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+  }
+
+  .scroll-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Section Background Variations */
+  .section-primary {
+    @apply bg-background;
+  }
+
+  .section-secondary {
+    @apply bg-secondary/40;
+  }
+
+  .section-accent {
+    @apply bg-muted/30;
+  }
+
+  /* Button Glow Effect */
+  .button-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .button-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-primary/20 blur-xl opacity-0 transition-opacity duration-300;
+  }
+
+  .button-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  .button-glow::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent opacity-0 transition-opacity duration-300;
+  }
+
+  .button-glow:hover::after {
+    @apply opacity-100;
+  }
 }
