@@ -1,14 +1,16 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Menu, X, Languages, Github } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language, toggleLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -24,7 +26,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-  // Create translated content based on the current language
   const translations = {
     home: language === "DE" ? "Home" : "Home",
     coaching: language === "DE" ? "Coaching" : "Coaching",
@@ -60,6 +61,15 @@ const Navbar = () => {
             <Link to="/talent-pool" className="nav-link font-medium text-lg">{translations.talentpool}</Link>
             
             <div className="ml-4 flex items-center gap-3">
+              <Button 
+                variant="ghost"
+                onClick={toggleTheme}
+                className="flex items-center gap-2 text-foreground/80 hover:text-primary"
+                size="sm"
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </Button>
+              
               <Button 
                 variant="ghost"
                 onClick={toggleLanguage}

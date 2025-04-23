@@ -13,6 +13,7 @@ import TalentPool from "./pages/TalentPool";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import NotFound from "./pages/NotFound";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
@@ -21,21 +22,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <LanguageProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/coaching" element={<Coaching />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/talent-pool" element={<TalentPool />} />
-            <Route path="/impressum" element={<Impressum />} />
-            <Route path="/datenschutz" element={<Datenschutz />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/coaching" element={<Coaching />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/talent-pool" element={<TalentPool />} />
+              <Route path="/impressum" element={<Impressum />} />
+              <Route path="/datenschutz" element={<Datenschutz />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </LanguageProvider>
+      </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

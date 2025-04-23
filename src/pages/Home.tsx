@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -37,7 +36,7 @@ const Home = () => {
     };
   }, []);
 
-  // Translations
+  // Translations for all sections
   const translations = {
     heroTitle: language === "DE" ? 
       "Karriere<span class='text-primary'>coaching</span> für deine <span class='text-gradient'>berufliche Zukunft</span>" : 
@@ -61,6 +60,21 @@ const Home = () => {
     coachingType3Title: language === "DE" ? "Führungskräfteentwicklung" : "Leadership Development",
     coachingType3Desc: language === "DE" ? "Entwickle deine Führungsqualitäten und baue deine Stärken für das nächste Karrierelevel aus." : "Develop your leadership qualities and build your strengths for the next career level.",
     moreInfo: language === "DE" ? "Mehr erfahren" : "Learn more",
+    coaching: {
+      title: language === "DE" ? "Unser Coaching Angebot" : "Our Coaching Services",
+      description: language === "DE" ? "Maßgeschneiderte Beratung für jeden Karriereschritt" : "Tailored consulting for every career step",
+      cta: language === "DE" ? "Zum Coaching" : "Go to Coaching"
+    },
+    jobs: {
+      title: language === "DE" ? "Jobs vermitteln" : "Job Placement",
+      description: language === "DE" ? "Wir verbinden Unternehmen mit den besten Talenten" : "We connect companies with the best talents",
+      cta: language === "DE" ? "Alle Jobs anzeigen" : "View all Jobs"
+    },
+    talentpool: {
+      title: language === "DE" ? "Unser Talentpool" : "Our Talent Pool",
+      description: language === "DE" ? "Exklusive Karrieremöglichkeiten für Mitglieder" : "Exclusive career opportunities for members",
+      cta: language === "DE" ? "Zum Talentpool" : "Go to Talent Pool"
+    }
   };
 
   return (
@@ -116,9 +130,9 @@ const Home = () => {
         {/* Coaching Section - Replaced the Services Section */}
         <Section bgColor="bg-background" className="py-24 relative">
           <div className="text-center mb-16 animate-on-scroll opacity-0">
-            <h2 className="headline-lg mb-4" dangerouslySetInnerHTML={{ __html: translations.coachingTitle }}></h2>
+            <h2 className="headline-lg mb-4" dangerouslySetInnerHTML={{ __html: translations.coaching.title }}></h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {translations.coachingSubtitle}
+              {translations.coaching.description}
             </p>
           </div>
           
@@ -156,6 +170,15 @@ const Home = () => {
               </div>
             ))}
           </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/coaching">
+              <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
+                {translations.coaching.cta}
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </Section>
 
         {/* Job Placement */}
@@ -165,10 +188,10 @@ const Home = () => {
           <div className="flex flex-col md:flex-row items-center relative z-10">
             <div className="md:w-1/2 mb-12 md:mb-0 md:pr-12 animate-on-scroll opacity-0">
               <h2 className="headline-lg mb-6">
-                <span className="text-gradient">Jobs vermitteln</span> leicht gemacht
+                <span className="text-gradient">{translations.jobs.title}</span> leicht gemacht
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Wir verbinden Unternehmen mit den besten Talenten. Unsere Experten kennen den Markt und finden die passende Position für dich.
+                {translations.jobs.description}. Unsere Experten kennen den Markt und finden die passende Position für dich.
               </p>
               <ul className="space-y-4 mb-8">
                 {[
@@ -183,9 +206,7 @@ const Home = () => {
                   </li>
                 ))}
               </ul>
-              <Button className="button-primary group">
-                Alle Jobs anzeigen <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              
             </div>
             
             <div className="md:w-1/2 animate-on-scroll opacity-0" style={{animationDelay: "0.2s"}}>
@@ -201,6 +222,15 @@ const Home = () => {
               </div>
             </div>
           </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/jobs">
+              <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
+                {translations.jobs.cta}
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </Section>
 
         {/* Talentpool */}
@@ -208,10 +238,10 @@ const Home = () => {
           <div className="flex flex-col md:flex-row-reverse items-center">
             <div className="md:w-1/2 mb-12 md:mb-0 md:pl-12 animate-on-scroll opacity-0">
               <h2 className="headline-lg mb-6">
-                Werde Teil unseres <span className="text-gradient">Talentpools</span>
+                Werde Teil unseres <span className="text-gradient">{translations.talentpool.title}</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Melde dich für unseren exklusiven Talentpool an und erhalte Zugang zu erstklassigen Karrieremöglichkeiten, die nicht öffentlich ausgeschrieben werden.
+                {translations.talentpool.description}.
               </p>
               <div className="space-y-4 mb-8">
                 {[
@@ -234,9 +264,7 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-              <Button className="button-primary group">
-                Zum Talentpool <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              
             </div>
             
             <div className="md:w-1/2 animate-on-scroll opacity-0" style={{animationDelay: "0.2s"}}>
@@ -251,6 +279,15 @@ const Home = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/talent-pool">
+              <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
+                {translations.talentpool.cta}
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </Section>
 
