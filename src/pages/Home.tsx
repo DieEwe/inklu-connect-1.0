@@ -93,9 +93,13 @@ const Home = () => {
                 {translations.heroText}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="button-primary text-lg px-6 py-6 rounded-lg group">
-                  {translations.coachingBtn}
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <Button className="relative group overflow-hidden">
+                  <div className="absolute inset-0 bg-[#f49357] opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#f49357] to-[#f4935780] opacity-0 group-hover:opacity-100 blur-lg transition-opacity"></div>
+                  <span className="relative px-6 py-4 text-lg text-white flex items-center">
+                    {translations.coachingBtn}
+                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
                 <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-6 py-6 text-lg rounded-lg">
                   {translations.talentpoolBtn}
