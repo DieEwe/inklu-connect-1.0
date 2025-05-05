@@ -28,13 +28,13 @@ const Datenschutz = () => {
                 <p className="mt-2 text-muted-foreground">
                   Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br /><br />
                   
-                  NocturneNexus GmbH<br />
-                  Musterstraße 123<br />
-                  12345 Musterstadt<br />
+                  Inklu-Solutions Gesellschaft für Inklusion und Teilhabe GmbH<br />
+                  Altenwall 17<br />
+                  28185 Bremen<br />
                   Deutschland<br /><br />
                   
                   Telefon: +49 123 456789<br />
-                  E-Mail: info@nocturnenexus.com
+                  E-Mail: info@inklusolutions.de
                 </p>
               </div>
               
@@ -57,7 +57,7 @@ const Datenschutz = () => {
                   Gesetzlich vorgeschriebener Datenschutzbeauftragter ist:<br /><br />
                   
                   Max Mustermann<br />
-                  E-Mail: datenschutz@nocturnenexus.com
+                  E-Mail: datenschutz@inklusolutions.de
                 </p>
               </div>
               

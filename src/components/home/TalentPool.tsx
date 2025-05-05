@@ -1,8 +1,8 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { GlowButton } from "@/components/ui/GlowButton";
 
 const TalentPool = () => {
   const { language } = useLanguage();
@@ -53,10 +53,15 @@ const TalentPool = () => {
           ))}
         </div>
         <Link to="/talent-pool">
-          <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
-            {translations.cta}
-            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <GlowButton 
+            variant="highlight" 
+            size="lg"
+          >
+            <div className="flex items-center whitespace-nowrap">
+              {translations.cta}
+      
+            </div>
+          </GlowButton>
         </Link>
       </div>
       

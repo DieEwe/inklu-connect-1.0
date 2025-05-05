@@ -1,43 +1,39 @@
-
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { GlowButton } from "@/components/ui/GlowButton";
 
-const CTASection = () => {
+const CTA = () => {
   const { language } = useLanguage();
   
   const translations = {
-    title: language === "DE" ? "Bereit für den nächsten Karriereschritt?" : "Ready for your next career step?",
+    title: language === "DE" ? 
+      "Bereit für den <span class='text-gradient'>nächsten Schritt</span>?" : 
+      "Ready for the <span class='text-gradient'>next step</span>?",
     description: language === "DE" ? 
-      "Registriere dich jetzt und starte deine Reise zu neuen beruflichen Möglichkeiten. Unser Team steht bereit, um dich zu unterstützen." : 
-      "Register now and start your journey to new career opportunities. Our team is ready to support you.",
-    register: language === "DE" ? "Jetzt registrieren" : "Register now",
-    login: language === "DE" ? "Zum Login" : "Go to login"
+      "Registriere dich noch heute und werde Teil unserer Community" : 
+      "Register today and become part of our community",
+    button: language === "DE" ? "Jetzt registrieren" : "Register now",
   };
 
   return (
-    <div className="relative z-10 rounded-2xl overflow-hidden animate-on-scroll opacity-0">
-      <div className="relative p-10 md:p-16 text-center">
-        <h2 className="headline-lg mb-6">
-          {translations.title}
-        </h2>
-        <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-          {translations.description}
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button className="button-primary text-lg px-8 py-6 rounded-lg group">
-            {translations.register} <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Link to="/login">
-            <Button variant="outline" className="border-border/50 text-foreground hover:bg-secondary/60 px-8 py-6 text-lg rounded-lg">
-              {translations.login}
-            </Button>
-          </Link>
-        </div>
-      </div>
+    <div className="text-center animate-on-scroll opacity-0">
+      <h2 
+        className="headline-lg mb-6"
+        dangerouslySetInnerHTML={{ __html: translations.title }}
+      ></h2>
+      <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+        {translations.description}
+      </p>
+      <Link to="/register">
+        <GlowButton
+          variant="highlight"
+          size="lg"
+        >
+          {translations.button}
+        </GlowButton>
+      </Link>
     </div>
   );
 };
 
-export default CTASection;
+export default CTA;

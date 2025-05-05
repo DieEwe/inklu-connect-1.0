@@ -1,8 +1,11 @@
+@import './styles/glow-button.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+
+
 @layer base {
   :root {
     --background: 222.2 84% 4.9%;
@@ -34,6 +37,11 @@
     --ring: 224.3 76.3% 48%;
     
     --radius: 0.5rem;
+
+    /* Button glow variables */
+    --btn-glowing: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+    --btn-glowing-inset: radial-gradient(50% 50% at 50% 50%, rgba(238, 230, 255, 0.2) 0%, rgba(238, 230, 255, 0.1) 100%);
+    --btn-glowing-inset-hover: radial-gradient(50% 50% at 50% 50%, rgba(238, 230, 255, 0.3) 0%, rgba(238, 230, 255, 0.15) 100%);
   }
 }
  
@@ -93,19 +101,60 @@
   }
   
   .circle-glow {
-    @apply absolute rounded-full bg-primary/20 blur-[100px] pointer-events-none z-0;
+    @apply absolute rounded-full blur-[100px] pointer-events-none z-0;
+    background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(124,58,237,0.05) 100%);
   }
   
   .section-primary {
     @apply bg-background;
+    background: radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 60%),
+                radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.08), transparent 60%),
+                #000;
+  }
+  
+  .section-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 60%),
+      radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.08), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
   
   .section-secondary {
-    @apply bg-neutral-900/50;
+    @apply bg-black;
+    background: radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.1), transparent 60%),
+                radial-gradient(circle at 15% 70%, rgba(124, 58, 237, 0.1), transparent 60%),
+                #000;
+    position: relative;
+    overflow: hidden; /* Ensure glows don't cause overflow */
+  }
+  
+  .section-secondary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.1), transparent 60%),
+      radial-gradient(circle at 15% 70%, rgba(124, 58, 237, 0.1), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
   
   .section-accent {
     @apply bg-primary/10;
+  }
+  
+  .glow-button:focus {
+    @apply outline-none ring-2 ring-[rgba(139,92,246,0.5)];
   }
 }
 

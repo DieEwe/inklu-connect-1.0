@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Calendar, Briefcase, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -61,7 +60,27 @@ const AppSelector = () => {
       description: translations.accountsettings.description,
       icon: <User className="h-10 w-10 text-white" />,
       path: "/apps/accountsettings",
-      iconBg: colorMap[2],
+      iconBg: "bg-gradient-to-tr from-[#6a82fb]/90 via-[#48b1f3]/70 to-[#bbe1fa]/50", // blueish gradient (was useradmin)
+    },
+    {
+      id: "myprofile",
+      title: language === "DE" ? "Mein Profil" : "My Profile",
+      description: language === "DE"
+        ? "Zeige und bearbeite deine Profildaten"
+        : "View and edit your profile details",
+      icon: <User className="h-10 w-10 text-white" />,
+      path: "/profile",
+      iconBg: "bg-gradient-to-tr from-[#6a82fb]/90 via-[#fc5c7d]/70 to-[#ffe7ba]/50", // unchanged
+    },
+    {
+      id: "useradmin",
+      title: language === "DE" ? "Verwaltung" : "Administration",
+      description: language === "DE"
+        ? "Verwalte Nutzer und Rollen"
+        : "Manage users and roles",
+      icon: <User className="h-10 w-10 text-white" />,
+      path: "/admin/users",
+      iconBg: "bg-gradient-to-tr from-[#7b1e1e]/90 via-[#b91c1c]/70 to-[#ffe7ba]/50", // dark red gradient
     }
   ];
 
@@ -73,19 +92,30 @@ const AppSelector = () => {
           key={app.id}
           className="hover-scale block"
         >
-          <div className="h-full service-card border-border/30 bg-secondary/30 backdrop-blur-sm hover:shadow-lg relative overflow-hidden group transition-all duration-300">
-            {/* Golden glow effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ffd700]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            {/* Golden border glow on hover */}
-            <div className="absolute inset-0 border border-[#ffd700]/0 group-hover:border-[#ffd700]/30 rounded-lg transition-all duration-300"></div>
-            
+          <div className="h-full service-card border-border/30 bg-secondary/30 backdrop-blur-sm hover:shadow-xl relative overflow-hidden group transition-all duration-300">
+            {/* Remove golden glow and border overlays */}
             <div className="flex flex-col items-center justify-center pt-8 pb-4 relative z-10">
               {/* logo + icon gradient */}
-              <div className={`mb-4 rounded-full p-4 ${app.iconBg} shadow-lg shadow-[#ffd700]/20 flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110`}>
+              <div
+                className={`mb-4 rounded-full p-4 ${app.iconBg} ${
+                  app.id === "accountsettings"
+                    ? "shadow-lg shadow-[#48b1f3]/30 group-hover:shadow-[#48b1f3]/60"
+                    : app.id === "useradmin"
+                    ? "shadow-lg shadow-[#b91c1c]/30 group-hover:shadow-[#b91c1c]/60"
+                    : app.id === "myprofile"
+                    ? "shadow-lg shadow-[#fc5c7d]/30 group-hover:shadow-[#fc5c7d]/60"
+                    : app.id === "mentorbooking"
+                    ? "shadow-lg shadow-[#fec45c]/30 group-hover:shadow-[#fec45c]/60"
+                    : app.id === "jobsync"
+                    ? "shadow-lg shadow-[#f0b040]/30 group-hover:shadow-[#f0b040]/60"
+                    : "shadow-lg"
+                } flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110`}
+              >
                 {app.icon}
               </div>
-              <h3 className="mt-1 text-2xl font-bold text-foreground group-hover:text-[#ffd700] transition-colors duration-300">{app.title}</h3>
+              <h3 className="mt-1 text-2xl font-bold text-foreground transition-colors duration-300">
+                {app.title}
+              </h3>
               <p className="text-center text-muted-foreground mt-2">
                 {app.description}
               </p>

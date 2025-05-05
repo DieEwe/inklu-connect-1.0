@@ -32,8 +32,10 @@ const Navbar = () => {
     jobs: language === "DE" ? "Jobs" : "Jobs",
     talentpool: language === "DE" ? "Talentpool" : "Talent Pool",
     login: language === "DE" ? "Login" : "Login",
-    register: language === "DE" ? "Registrieren" : "Register"
+    register: language === "DE" ? "Registrieren" : "Sign Up"
   };
+
+  const isLoggedIn = typeof window !== "undefined" && localStorage.getItem("isLoggedIn") === "true";
 
   return (
     <header 
@@ -44,16 +46,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="h-9 w-9 relative">
+            <div className="h-10 sm:h-12 md:h-14 transition-all">
               <img 
-                src="/logo.png" 
-                alt="Inklu-Connect Logo" 
-                className="h-full w-full object-contain"
+                src={theme === 'dark' ? "/InkluConnectLogoTextWhite.png" : "/InkluConnectLogoText.png"}
+                alt="Inklu-Connect" 
+                className="h-full w-auto object-contain"
               />
             </div>
-            <span className="text-2xl font-bold tracking-tight text-foreground">
-              Inklu-Connect
-            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -61,6 +60,10 @@ const Navbar = () => {
             <Link to="/coaching" className="nav-link font-medium text-lg">{translations.coaching}</Link>
             <Link to="/jobs" className="nav-link font-medium text-lg">{translations.jobs}</Link>
             <Link to="/talent-pool" className="nav-link font-medium text-lg">{translations.talentpool}</Link>
+            
+            {isLoggedIn && (
+              <Link to="/dashboard" className="nav-link font-medium text-lg">Dashboard</Link>
+            )}
             
             <div className="ml-4 flex items-center gap-3">
               <Button 
@@ -113,6 +116,11 @@ const Navbar = () => {
             <Link to="/coaching" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.coaching}</Link>
             <Link to="/jobs" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.jobs}</Link>
             <Link to="/talent-pool" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.talentpool}</Link>
+            
+            {isLoggedIn && (
+              <Link to="/dashboard" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>Dashboard</Link>
+            )}
+            
             <div className="h-px w-full bg-border/20 my-2"></div>
             <Link to="/login" className="py-2 text-foreground/90 hover:text-primary transition-colors" onClick={toggleMenu}>{translations.login}</Link>
             <Link to="/register" onClick={toggleMenu}>

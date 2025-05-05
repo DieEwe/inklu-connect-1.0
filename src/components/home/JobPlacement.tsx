@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
@@ -9,26 +8,35 @@ const JobPlacement = () => {
   
   const translations = {
     title: language === "DE" ? "Jobs vermitteln" : "Job Placement",
+    titleSuffix: language === "DE" ? "leicht gemacht" : "made easy",
     description: language === "DE" ? 
       "Wir verbinden Unternehmen mit den besten Talenten" : 
       "We connect companies with the best talents",
     cta: language === "DE" ? "Alle Jobs anzeigen" : "View all Jobs",
-    benefits: [
+    benefits: language === "DE" ? [
       "Exklusive Stellenangebote",
       "Persönliche Vermittlung",
       "Unterstützung im Bewerbungsprozess",
       "Langfristige Karrierebegleitung"
-    ]
+    ] : [
+      "Exclusive job offerings",
+      "Personal placement",
+      "Support throughout the application process",
+      "Long-term career guidance"
+    ],
+    expertText: language === "DE" ? 
+      "Unsere Experten kennen den Markt und finden die passende Position für dich." : 
+      "Our experts know the market and will find the right position for you."
   };
 
   return (
     <div className="flex flex-col md:flex-row items-center relative z-10">
       <div className="md:w-1/2 mb-12 md:mb-0 md:pr-12 animate-on-scroll opacity-0">
         <h2 className="headline-lg mb-6">
-          <span className="text-gradient">{translations.title}</span> leicht gemacht
+          <span className="text-gradient">{translations.title}</span> {translations.titleSuffix}
         </h2>
         <p className="text-lg text-muted-foreground mb-8">
-          {translations.description}. Unsere Experten kennen den Markt und finden die passende Position für dich.
+          {translations.description}. {translations.expertText}
         </p>
         <ul className="space-y-4 mb-8">
           {translations.benefits.map((item, index) => (

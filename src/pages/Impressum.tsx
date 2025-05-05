@@ -19,9 +19,9 @@ const Impressum = () => {
               <div>
                 <h2 className="text-lg font-medium">Angaben gemäß § 5 TMG</h2>
                 <p className="mt-2 text-muted-foreground">
-                  NocturneNexus GmbH<br />
-                  Musterstraße 123<br />
-                  12345 Musterstadt<br />
+                  Inklu-Solutions Gesellschaft für Inklusion und Teilhabe GmbH<br />
+                  Altenwall 17<br />
+                  28185 Bremen<br />
                   Deutschland
                 </p>
               </div>
@@ -30,7 +30,7 @@ const Impressum = () => {
                 <h2 className="text-lg font-medium">Kontakt</h2>
                 <p className="mt-2 text-muted-foreground">
                   Telefon: +49 123 456789<br />
-                  E-Mail: info@nocturnenexus.com
+                  E-Mail: info@inklusolutions.de
                 </p>
               </div>
               

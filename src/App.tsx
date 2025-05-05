@@ -14,6 +14,12 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import UserProfile from "@/pages/UserProfile";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import Dashboard from "@/pages/Dashboard";
+import Questionnaire from "@/pages/Questionnaire";
+import UserAdmin from "@/pages/Admin/Administration";
+import UserRoleAssignment from "@/pages/Admin/UserRoleAssignment";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +40,25 @@ const App = () => (
               <Route path="/talent-pool" element={<TalentPool />} />
               <Route path="/impressum" element={<Impressum />} />
               <Route path="/datenschutz" element={<Datenschutz />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/questionnaire" element={<Questionnaire />} />
+              <Route path="/admin/users" element={<UserAdmin />} />
+              <Route path="/admin/users/roles" element={<UserRoleAssignment />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -1,0 +1,221 @@
+/* Base glow button styles */
+.glow-button {
+  --button-background: #000000;
+  --button-color: #fff;
+  --button-shadow: rgba(33, 4, 104, 0.2);
+  --button-shine-left: rgba(120, 0, 245, 0.5);
+  --button-shine-right: rgba(200, 148, 255, 0.65);
+  --button-glow-start: #B000E8;
+  --button-glow-end: #009FFD;
+  --button-glow-opacity: 0;
+  --button-border-thickness: 1.5px;
+  --pointer-x: 0px;
+  --pointer-y: 0px;
+  --rotation: 0deg;
+
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 11px;
+  line-height: 24px;
+  color: var(--button-color);
+  background: none;
+  box-shadow: 0 8px 20px var(--button-shadow);
+}
+
+/* Gradient background container */
+.glow-button .gradient {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: rotate(-.35deg);
+}
+
+/* Gradient background element */
+.glow-button .gradient:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: scale(1.15) translateY(-42px) rotate(0deg) translateZ(0);
+  padding-bottom: 105%;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--button-shine-left), var(--button-shine-right));
+  animation: glow-button-rotate 2s infinite linear;
+  filter: blur(0.5px);
+}
+
+/* Button content styles */
+.glow-button span {
+  z-index: 1;
+  position: relative;
+  display: block;
+  border-radius: inherit;
+  background-color: var(--button-background);
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  margin: var(--button-border-thickness);
+  width: calc(100% - 2 * var(--button-border-thickness));
+  height: calc(100% - 2 * var(--button-border-thickness));
+}
+
+/* Interactive glow effect */
+.glow-button span:before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: -16px;
+  transform: translate(var(--pointer-x, 0px), var(--pointer-y, 0px)) translateZ(0);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--button-glow-start), var(--button-glow-end));
+  opacity: var(--button-glow-opacity, 0);
+  transition: opacity 0.5s;
+  filter: blur(22px);
+}
+
+/* Hover state */
+.glow-button:hover {
+  --button-glow-opacity: 1;
+}
+
+.glow-button:hover .gradient:before {
+  animation: glow-pulse 2s infinite linear;
+}
+
+/* Animations */
+@keyframes glow-button-rotate {
+  0% {
+    transform: scale(1.15) translateY(-42px) rotate(0deg) translateZ(0);
+  }
+  100% {
+    transform: scale(1.15) translateY(-42px) rotate(360deg) translateZ(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    opacity: 0.75;
+    transform: scale(1.15) translateY(-42px) rotate(var(--rotation)) translateZ(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18) translateY(-42px) rotate(calc(var(--rotation) + 180deg)) translateZ(0);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1.15) translateY(-42px) rotate(calc(var(--rotation) + 360deg)) translateZ(0);
+  }
+}
+
+/* Wide glow button variant */
+.wide-glow-button {
+  --button-border-thickness: 0.5px;
+  --animation-scale: 1.25;
+  --animation-offset: -50px;
+  border-radius: var(--button-border-radius, 13px);
+}
+
+/* Override the specific span styles for wide glow buttons */
+.wide-glow-button span {
+  margin: 0.5px; /* Direct value instead of variable */
+  width: calc(100% - 2 * 0.5px); /* Direct calculation */
+  height: calc(100% - 2 * 0.5px); /* Direct calculation */
+}
+
+.wide-glow-button .gradient {
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  overflow: visible;
+  transform: rotate(0deg);
+  /* Add z-index to ensure gradient stays behind content */
+  z-index: 0;
+}
+
+.wide-glow-button .gradient:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Add bottom to ensure full coverage */
+  padding-bottom: 130%;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--button-shine-left), var(--button-shine-right));
+  /* Adjust animation to be more stable */
+  animation: none;
+  filter: blur(1px); /* Slightly increase blur to soften edges */
+  transform-origin: center center; /* Ensure rotation is centered */
+  transform: scale(1.35) translateY(-45px) rotate(0deg) translateZ(0);
+}
+
+@keyframes wide-glow-rotate {
+  0% {
+    transform: scale(1.35) translateY(-45px) rotate(0deg) translateZ(0);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.35) translateY(-45px) rotate(360deg) translateZ(0);
+    opacity: 0.9;
+  }
+}
+
+.wide-glow-button:hover .gradient:before {
+  animation: none;
+}
+
+/* Rounded button variant */
+.glow-button.rounded-xl .gradient {
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  overflow: visible;
+  transform: none;
+}
+
+.glow-button.rounded-xl .gradient:before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  transform: scale(1.5) translateZ(0);
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--button-shine-left), var(--button-shine-right));
+  animation: rounded-button-rotate 3s infinite linear;
+  filter: blur(0.5px);
+}
+
+@keyframes rounded-button-rotate {
+  0% {
+    transform: scale(1.5) rotate(0deg) translateZ(0);
+  }
+  100% {
+    transform: scale(1.5) rotate(360deg) translateZ(0);
+  }
+}
+
+.glow-button.rounded-xl:hover .gradient:before {
+  animation: rounded-button-pulse 3s infinite linear;
+}
+
+@keyframes rounded-button-pulse {
+  0% {
+    opacity: 0.75;
+    transform: scale(1.5) rotate(var(--rotation)) translateZ(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.55) rotate(calc(var(--rotation) + 180deg)) translateZ(0);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1.5) rotate(calc(var(--rotation) + 360deg)) translateZ(0);
+  }
+}
+

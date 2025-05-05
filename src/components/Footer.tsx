@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
               <img 
-                src="/logo.png" 
+                src="/InkluConnectLogo.png" 
                 alt="Inklu-Connect Logo" 
                 className="h-8 w-8 rounded-lg"
               />
