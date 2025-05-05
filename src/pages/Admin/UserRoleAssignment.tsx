@@ -89,7 +89,7 @@ const interestLabels = {
 const mockUsers = [
   {
     id: 1,
-    displayName: "Anna Schmidt",
+    displayName: "Meow",
     email: "anna@example.com",
     questionnaire: {
       internal: false,
@@ -101,7 +101,7 @@ const mockUsers = [
   },
   {
     id: 2,
-    displayName: "Max Mustermann",
+    displayName: "Schnabeltier",
     email: "max@example.com",
     questionnaire: {
       internal: false,
